@@ -4,13 +4,11 @@ import matplotlib.pyplot as plt
 
 class ExpenseRecorder:
     def __init__(self):
-        # Initialize with predefined categories and an empty expense list
         self.categories = ["Groceries", "Transportation", "Utilities", "Entertainment"]
         self.expenses = []
         self.load_data()
 
     def load_data(self):
-        """Load expenses data from a file if it exists."""
         try:
             with open("expenses.json", "r") as file:
                 data = json.load(file)
@@ -20,7 +18,6 @@ class ExpenseRecorder:
             print("No previous data found or file is corrupted. Starting fresh.")
 
     def save_data(self):
-        """Save expenses and categories to a file."""
         data = {
             "categories": self.categories,
             "expenses": self.expenses
@@ -29,7 +26,6 @@ class ExpenseRecorder:
             json.dump(data, file)
 
     def add_expense(self):
-        """Add a new expense entry."""
         try:
             amount = float(input("Enter amount spent: "))
             description = input("Enter description: ")
@@ -42,7 +38,6 @@ class ExpenseRecorder:
             print("Invalid amount. Please enter a numeric value.")
 
     def choose_category(self):
-        """Allow the user to choose or add a new category."""
         print("\nExpense Categories:")
         for i, cat in enumerate(self.categories, start=1):
             print(f"{i}. {cat}")
@@ -69,7 +64,6 @@ class ExpenseRecorder:
             return self.choose_category()
 
     def view_summary(self, period="all"):
-        """Display the expense summary, optionally for a specific period."""
         if period == "all":
             expenses = self.expenses
         else:
@@ -94,7 +88,6 @@ class ExpenseRecorder:
         self.plot_expenses(category_summary)
 
     def plot_expenses(self, category_summary):
-        """Generate a pie chart for the expense summary."""
         labels = list(category_summary.keys())
         sizes = list(category_summary.values())
         plt.figure(figsize=(8, 6))
@@ -103,7 +96,6 @@ class ExpenseRecorder:
         plt.show()
 
     def run(self):
-        """Main program loop."""
         while True:
             print("\nExpense Recorder Menu:")
             print("1. Add Expense")
